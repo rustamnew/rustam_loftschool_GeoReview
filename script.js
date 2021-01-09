@@ -163,8 +163,6 @@ document.addEventListener('click', (e) => {
         let place = form.elements.place.value
         let review = form.elements.review.value
         
-
-        
         let coordsString = `${form.dataset.coords}`
         let coordsSplit = coordsString.split(',')
         coordsSplitNumber = []
@@ -175,7 +173,6 @@ document.addEventListener('click', (e) => {
         console.log(coords)
 
         let address = getAddress(coords)
-
 
         i = localStorage.length + 1
 
@@ -242,8 +239,6 @@ function createPlacemarks() {
 
         i++
     })
-
-    //clustererVar = clusterer
     
     clustererVar.add(geoObjects)
 
@@ -256,8 +251,11 @@ function addListeners(myMap) {
     myMap.events.add('click', (e) => openEmptyModal(e));
 }
 
+let modalHeight = document.querySelector('#modal').offsetHeight
+
 
 async function openEmptyModal(e) {
+    console.log(e)
 
     let inputs = document.querySelectorAll('.input.text')
     inputs.forEach((e) => {
@@ -266,7 +264,7 @@ async function openEmptyModal(e) {
 
     let posX = e.getSourceEvent().originalEvent.domEvent.originalEvent.clientX;
 
-    let posY = e.getSourceEvent().originalEvent.domEvent.originalEvent.clientY;
+    let posY = e.getSourceEvent().originalEvent.domEvent.originalEvent.clientY - modalHeight;
 
     console.log(posX)
     console.log(posY)
